@@ -6,6 +6,8 @@ Page: [yeftakun.my.id](http://yeftakun.my.id)
 
 Dynamic page: [blog.php](page\blog.php) & [blogcontent.php](page\blog-list\blogcontent.php)
 
+### Database
+
 ```
 Name DB: myblog
 

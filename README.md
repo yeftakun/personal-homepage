@@ -43,7 +43,7 @@ update password set pass='password_baru123';
 
 ### Add Blog
 
-<p>Buat post baru di <a href="ignorethis\add-blog.php">add-blog.php</a> (<a href="localhost/personal-homepage/ignorethis/add-blog.php">localhost/personal-homepage/ignorethis/add-blog.php</a>). Untuk bagian <strong>content</strong> buat dengan struktur html (header mulai h2)</p>
+<p>Buat post baru di <a href="ignorethis\add-blog.php">add-blog.php</a> (<a href="http://localhost/personal-homepage/ignorethis/add-blog.php">localhost/personal-homepage/ignorethis/add-blog.php</a>). Untuk bagian <strong>content</strong> buat dengan struktur html (header mulai h2)</p>
 
 ![content.png](ignorethis/content.png)
 

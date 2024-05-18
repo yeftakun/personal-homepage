@@ -7,6 +7,8 @@ Page: [yeftakun.my.id](http://yeftakun.my.id)
 Dynamic page: [blog.php](page\blog.php) & [blogcontent.php](page\blog-list\blogcontent.php)
 
 ```
+Name DB: myblog
+
 Tabel categories:
 +--------------------------------------------------------------------+
 | category_id | int(11)      | NO   | PRI | NULL    | auto_increment |
@@ -14,16 +16,16 @@ Tabel categories:
 +--------------------------------------------------------------------+
 
 Tabel posts:
-+---------------------------------------------------------------------------------------+
-| post_id      | int(11)      | NO   | PRI | NULL                      | auto_increment |
-| title        | varchar(255) | NO   |     | NULL                      |                |
-| content      | text         | NO   |     | NULL                      |                |
-| author       | varchar(100) | NO   |     | NULL                      |                |
-| publish_date | date         | NO   |     | NULL                      |                |
++-------------------------------------------------------------------------+
+| post_id      | int(11)      | NO   | PRI | NULL        | auto_increment |
+| title        | varchar(255) | NO   |     | NULL        |                |
+| content      | text         | NO   |     | NULL        |                |
+| author       | varchar(100) | NO   |     | NULL        |                |
+| publish_date | date         | NO   |     | NULL        |                |
 | image_path   | varchar(255) | NO   |     | default.png |                |
-| source_link  | varchar(255) | YES  |     | NULL                      |                |
-| category_id  | int(11)      | YES  | MUL | NULL                      |                |
-+---------------------------------------------------------------------------------------+
+| source_link  | varchar(255) | YES  |     | NULL        |                |
+| category_id  | int(11)      | YES  | MUL | NULL        |                |
++-------------------------------------------------------------------------+
 
 Tabel visitor_count:
 +---------------------------------------------------------+

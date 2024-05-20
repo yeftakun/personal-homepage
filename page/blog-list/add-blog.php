@@ -141,7 +141,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="author" name="author" required>
 
             <label for="image" class="uploadimg">Upload Cover Image</label>
-            <input type="file" id="image" name="image" accept="image/*" required>
+            <input type="file" id="image" name="image" accept="image/*">
             <img id="image-preview" src="#" alt="image-preview">
 
             <label for="source_link">Source Link:</label>

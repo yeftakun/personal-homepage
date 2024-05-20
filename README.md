@@ -53,4 +53,6 @@ update password set pass='password_baru123';
 
 ![content.png](ignorethis/content.png)
 
-<p>Ukuran file tidak lebih dari 500KB</p>
+<ul>
+<li>Ukuran file tidak lebih dari 500KB</li>
+<ul>

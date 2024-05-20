@@ -27,12 +27,17 @@
             width: 100%;
             border-collapse: collapse;
             margin-bottom: 20px;
+            table-layout: auto; /* Tambahkan ini untuk menyesuaikan lebar kolom */
         }
 
         th, td {
             padding: 12px 15px;
             text-align: left;
             border-bottom: 1px solid #ddd;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 290px; /* Tambahkan ini untuk membatasi lebar teks */
         }
 
         th {
@@ -178,6 +183,17 @@
         .ini-tombol a:hover {
         background-color: #0056b3;
         }
+        .control {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .control input {
+            padding: 10px;  
+            width: 300px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
     </style>
     <link rel="stylesheet" href="../../styles/style.css">
     <link rel="icon" href="../assets/logo/miaw.ico">
@@ -196,21 +212,26 @@
 
     <div class="container">
     <!-- <a href="" style="margin-bottom: 20px; display: block;">Add New Post</a> -->
-    <div class="ini-tombol">
-                <!-- Tombol Tambah postingan -->
-                <a href="add-blog.php">Add New Post</a>
+    <div class="control">
+        <div class="ini-tombol">
+                    <!-- Tombol Tambah postingan -->
+                    <a href="add-blog.php">Add New Post</a>
+        </div>
+    
+        <input type="text" id="searchInput" placeholder="Search...">
     </div>
+
 
     <table>
         <thead>
             <tr>
-                <th>Post ID</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Publish Date</th>
-                <th>Category</th>
-                <th>Image</th>
-                <th>Source Link</th>
+                <th id="post_id">Post ID</th>
+                <th id="title">Title</th>
+                <th id="author">Author</th>
+                <th id="publish_date">Publish Date</th>
+                <th id="category">Category</th>
+                <th id="image_path">Image Path</th>
+                <th id="source_link">Source Link</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -229,13 +250,13 @@
                 // Save the title of the post
                 $postTitle = $row['title'];
                 echo '<tr>';
-                echo '<td>' . $row['post_id'] . '</td>';
+                echo '<td style="max-width: 75px;">' . $row['post_id'] . '</td>';
                 echo '<td>' . $row['title'] . '</td>';
-                echo '<td>' . $row['author'] . '</td>';
-                echo '<td>' . $row['publish_date'] . '</td>';
-                echo '<td>' . $row['category_name'] . '</td>';
-                echo '<td>' . $row['image_path'] . '</td>';
-                echo '<td>' . $row['source_link'] . '</td>';
+                echo '<td style="max-width: 150px;">' . $row['author'] . '</td>';
+                echo '<td style="max-width: 80px;">' . $row['publish_date'] . '</td>';
+                echo '<td style="max-width: 80px;">' . $row['category_name'] . '</td>';
+                echo '<td style="max-width: 80px;">' . $row['image_path'] . '</td>';
+                echo '<td style="max-width: 150px;">' . $row['source_link'] . '</td>';
                 // Add edit and delete buttons with appropriate links and attributes
                 echo '<td>';
                 echo '<div class="ini-tombol"><a href="edit-blog.php?id=' . $row['post_id'] . '">Edit</a></div>';
@@ -281,6 +302,39 @@
             }
         }
     </script>
+    <script>
+    // Ambil elemen input pencarian
+    var searchInput = document.getElementById("searchInput");
+
+    // Tambahkan event listener untuk memicu pencarian setiap kali teks di input berubah
+    searchInput.addEventListener("input", function() {
+        var filter = searchInput.value.toUpperCase();
+        var table = document.querySelector("table");
+        var rows = table.getElementsByTagName("tr");
+
+        // Loop melalui semua baris dan sembunyikan yang tidak cocok dengan pencarian
+        for (var i = 0; i < rows.length; i++) {
+            var cells = rows[i].getElementsByTagName("td");
+            var showRow = false;
+            for (var j = 0; j < cells.length; j++) {
+                var cell = cells[j];
+                if (cell) {
+                    var txtValue = cell.textContent || cell.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        showRow = true;
+                        break;
+                    }
+                }
+            }
+            // Tampilkan baris jika cocok dengan pencarian, sembunyikan jika tidak
+            if (showRow) {
+                rows[i].style.display = "";
+            } else {
+                rows[i].style.display = "none";
+            }
+        }
+    });
+</script>
 
     <script src="../script/anim-type.js"></script>
     <script src="../script/script.js"></script>

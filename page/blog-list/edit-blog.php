@@ -2,6 +2,45 @@
 // Include connection file
 include('../../connection.php');
 
+// Define uploadImage function di awal kode PHP
+function uploadImage() {
+    $targetDir = "../../assets/img/";
+    $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+    $uploadOk = 1;
+    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+    // Check if image file is a actual image or fake image
+    $check = getimagesize($_FILES["image"]["tmp_name"]);
+    if($check !== false) {
+        $uploadOk = 1;
+    } else {
+        echo "File is not an image.";
+        $uploadOk = 0;
+    }
+    // Check file size
+    if ($_FILES["image"]["size"] > 512000) {
+        echo "Sorry, your file is too large.";
+        $uploadOk = 0;
+    }
+    // Allow certain file formats
+    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+    && $imageFileType != "gif" ) {
+        echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+        $uploadOk = 0;
+    }
+    // Check if $uploadOk is set to 0 by an error
+    if ($uploadOk == 0) {
+        echo "Sorry, your file was not uploaded.";
+    // if everything is ok, try to upload file
+    } else {
+        if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
+            return basename( $_FILES["image"]["name"]);
+        } else {
+            echo "Sorry, there was an error uploading your file.";
+            return '';
+        }
+    }
+}
+
 // Initialize variables
 $title = $author = $imagePath = $sourceLink = $category = $content = '';
 $publishDate = date('Y-m-d'); // Current date
@@ -64,6 +103,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
     $content = $_POST['content'];
     $publishDate = $_POST['publish_date']; // Update publish date with user input
+
+    // Check if a new image file is uploaded
+    if ($_FILES['image']['size'] > 0) {
+        // Delete old image
+        if (!empty($imagePath)) {
+            $oldImagePath = "../../assets/img/" . $imagePath;
+            if (file_exists($oldImagePath)) {
+                unlink($oldImagePath);
+            }
+        }
+        // Upload new image
+        $imagePath = uploadImage();
+
+    }
+
 
     // Update data into database
     $query = "UPDATE posts 
@@ -200,7 +254,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <label for="author">Author:</label>
         <input type="text" id="author" name="author" value="<?php echo $author; ?>" required>
         
-        <label for="image" class="uploadimg">Upload Sampul:</label>
+        <label for="image" class="uploadimg">Change Cover</label>
         <input type="file" id="image" name="image" accept="image/*">
         <!-- Image preview element -->
         <img id="image-preview" src="../../assets/img/<?php echo $imagePath; ?>" alt="image-preview">

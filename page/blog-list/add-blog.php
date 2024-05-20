@@ -7,11 +7,23 @@ $title = $author = $imagePath = $sourceLink = $category = $content = '';
 $publishDate = date('Y-m-d'); // Current date
 
 // Function to upload image
+// Function to upload image
 function uploadImage() {
     $targetDir = "../../assets/img/";
-    $targetFile = $targetDir . basename($_FILES["image"]["name"]);
+    $imageName = basename($_FILES["image"]["name"]);
+    $targetFile = $targetDir . $imageName;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+
+    // Check if file already exists
+    $counter = 1;
+    while (file_exists($targetFile)) {
+        $info = pathinfo($imageName);
+        $newName = $info['filename'] . '-' . $counter . '.' . $info['extension'];
+        $targetFile = $targetDir . $newName;
+        $counter++;
+    }
+
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["image"]["tmp_name"]);
     if ($check !== false) {
@@ -38,7 +50,7 @@ function uploadImage() {
         return "default.png";
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            return basename($_FILES["image"]["name"]);
+            return $newName;
         } else {
             echo "Sorry, there was an error uploading your file.";
             return '';

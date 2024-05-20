@@ -13,13 +13,13 @@ Dynamic page: [blog.php](page\blog.php) & [blogcontent.php](page\blog-list\blogc
 ```
 Name DB: myblog
 
-Tabel categories:
+categories:
 +--------------------------------------------------------------------+
 | category_id | int(11)      | NO   | PRI | NULL    | auto_increment |
 | name        | varchar(255) | NO   |     | NULL    |                |
 +--------------------------------------------------------------------+
 
-Tabel posts:
+posts:
 +-------------------------------------------------------------------------+
 | post_id      | int(11)      | NO   | PRI | NULL        | auto_increment |
 | title        | varchar(255) | NO   |     | NULL        |                |
@@ -31,13 +31,13 @@ Tabel posts:
 | category_id  | int(11)      | YES  | MUL | NULL        |                |
 +-------------------------------------------------------------------------+
 
-Tabel visitor_count:
+visitor_count:
 +---------------------------------------------------------+
 | id    | int(11) | NO   | PRI | NULL    | auto_increment |
 | COUNT | int(11) | YES  |     | 0       |                |
 +---------------------------------------------------------+
 
-Tabel password:
+password:
 +----------------------------------------------------+
 | id    | int(11)     | NO   | PRI | NULL    |       |
 | pass  | varchar(12) | YES  |     | NULL    |       |
@@ -46,8 +46,10 @@ update password set pass='password_baru123';
 ```
 
 ### Add Blog
-
-<p>Buat blog baru di <a href="ignorethis\add-blog.php">add-blog.php</a> (<a href="http://localhost/personal-homepage/ignorethis/add-blog.php">localhost/personal-homepage/ignorethis/add-blog.php</a>). Untuk bagian <strong>content</strong> buat dengan struktur html (header mulai h2)</p>
+<ul>
+<li>Buat blog baru di <a href="ignorethis\add-blog.php">add-blog.php</a> (<a href="http://localhost/personal-homepage/ignorethis/add-blog.php">localhost/personal-homepage/ignorethis/add-blog.php</a>).
+<li>Untuk bagian <strong>content</strong> buat dengan struktur html (header mulai h2)</li>
+</ul>
 
 ![content.png](ignorethis/content.png)
 

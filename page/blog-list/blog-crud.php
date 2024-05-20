@@ -10,6 +10,7 @@
         .container {
             margin-left: 20px;
             margin-right: 20px;
+            margin-top: 100px;
         }
         body {
             font-family: Arial, sans-serif;
@@ -41,6 +42,7 @@
 
         tr:hover {
             background-color: #00EEFF;
+            color: black;
         }
 
         a {
@@ -192,11 +194,6 @@
         </nav>
     </header>
 
-    <br>
-    <br>
-    <br>
-    <br>
-    <br>
     <div class="container">
     <!-- <a href="" style="margin-bottom: 20px; display: block;">Add New Post</a> -->
     <div class="ini-tombol">

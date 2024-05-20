@@ -11,10 +11,10 @@ function uploadImage() {
     $targetDir = "../../assets/img/";
     $targetFile = $targetDir . basename($_FILES["image"]["name"]);
     $uploadOk = 1;
-    $imageFileType = strtolower(pathinfo($targetFile,PATHINFO_EXTENSION));
+    $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
     // Check if image file is a actual image or fake image
     $check = getimagesize($_FILES["image"]["tmp_name"]);
-    if($check !== false) {
+    if ($check !== false) {
         $uploadOk = 1;
     } else {
         echo "File is not an image.";
@@ -26,18 +26,19 @@ function uploadImage() {
         $uploadOk = 0;
     }
     // Allow certain file formats
-    if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
-    && $imageFileType != "gif" ) {
+    if ($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+        && $imageFileType != "gif") {
         echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
         $uploadOk = 0;
     }
     // Check if $uploadOk is set to 0 by an error
     if ($uploadOk == 0) {
         echo "Sorry, your file was not uploaded.";
-    // if everything is ok, try to upload file
+        // if file is not uploaded, return default image path
+        return "default.png";
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            return basename( $_FILES["image"]["name"]);
+            return basename($_FILES["image"]["name"]);
         } else {
             echo "Sorry, there was an error uploading your file.";
             return '';
@@ -57,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     if ($password != $stored_password) {
         echo "<script>alert('Password salah'); history.back();</script>";
-    exit(); // Stop further execution
+        exit(); // Stop further execution
     }
 
     // Continue processing the form if password matches
@@ -69,8 +70,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $category = $_POST['category'];
     $content = $_POST['content'];
 
-    // Upload image
-    $imagePath = uploadImage();
+    // Check if an image file is uploaded
+    if ($_FILES['image']['size'] > 0) {
+        // Upload image
+        $imagePath = uploadImage();
+    } else {
+        // If no image is uploaded, set default image path
+        $imagePath = "default.png";
+    }
+
+    // Check if a category is selected
+    if (empty($_POST['category'])) {
+        // If no category is selected, set category_id to 1000
+        $category = 1000;
+    } else {
+        // If a category is selected, use the selected category_id
+        $category = $_POST['category'];
+    }
 
     // Insert data into database
     $query = "INSERT INTO posts (title, author, publish_date, image_path, source_link, category_id, content) 
@@ -92,7 +108,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "Error: " . $stmt->errorInfo()[2];
     }
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -148,11 +163,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <input type="text" id="source_link" name="source_link" required>
 
             <label for="category">Category:</label>
-            <select id="category" name="category" required>
+            <select id="category" name="category">
                 <option value="">Select Category</option>
                 <?php
-                // Fetch categories from the database
-                $query = "SELECT * FROM categories";
+                // Fetch categories from the database excluding the "Other" category
+                $query = "SELECT * FROM categories WHERE name != 'Other'";
                 $stmt = $conn->query($query);
                 while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                     echo '<option value="' . $row['category_id'] . '">' . $row['name'] . '</option>';

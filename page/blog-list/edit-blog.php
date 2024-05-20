@@ -119,6 +119,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     }
 
+    // Check if a category is selected
+    if (empty($_POST['category'])) {
+        // If no category is selected, set category_id to 1000
+        $category = 1000;
+    } else {
+        // If a category is selected, use the selected category_id
+        $category = $_POST['category'];
+    }
 
     // Update data into database
     $query = "UPDATE posts 
@@ -265,11 +273,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <input type="text" id="source_link" name="source_link" value="<?php echo $sourceLink; ?>" required>
         
         <label for="category">Category:</label>
-        <select id="category" name="category" required>
+        <select id="category" name="category">
             <option value="">Select Category</option>
             <?php
             // Fetch categories from the database
-            $query = "SELECT * FROM categories";
+            $query = "SELECT * FROM categories WHERE name != 'Other'";
             $stmt = $conn->query($query);
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $selected = ($category == $row['category_id']) ? "selected" : "";

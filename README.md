@@ -1,6 +1,6 @@
 # Personal Homepage
 
-On-going repo dari [TIK2032-project-php-mysql](https://github.com/yeftakun/TIK2032-project-php-mysql.git)
+On-going repo dari tugas [TIK2032-project-php-mysql](https://github.com/yeftakun/TIK2032-project-php-mysql.git)
 
 Page: [yeftakun.my.id](http://yeftakun.my.id)
 

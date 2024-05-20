@@ -18,7 +18,9 @@ if (isset($_GET['id'])) {
     if ($row && !empty($row['image_path'])) {
         $imagePath = '../../assets/img/' . $row['image_path'];
         if (file_exists($imagePath)) {
-            unlink($imagePath); // Delete the image file
+            if ($imagePath != '../../assets/img/default.png'){
+                unlink($imagePath); // Delete the image file
+            }
         }
     }
 

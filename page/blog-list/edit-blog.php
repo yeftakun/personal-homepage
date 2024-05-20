@@ -106,10 +106,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if a new image file is uploaded
     if ($_FILES['image']['size'] > 0) {
         // Delete old image
-        if (!empty($imagePath)) {
-            $oldImagePath = "../../assets/img/" . $imagePath;
-            if (file_exists($oldImagePath)) {
-                unlink($oldImagePath);
+        if ($row && !empty($row['image_path'])) {
+            $imagePath = '../../assets/img/' . $row['image_path'];
+            if (file_exists($imagePath)) {
+                if ($imagePath != '../../assets/img/default.png'){
+                    unlink($imagePath);
+                }
             }
         }
         // Upload new image

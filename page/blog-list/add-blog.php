@@ -8,12 +8,14 @@ $publishDate = date('Y-m-d'); // Current date
 
 // Function to upload image
 // Function to upload image
+// Function to upload image
 function uploadImage() {
     $targetDir = "../../assets/img/";
     $imageName = basename($_FILES["image"]["name"]);
     $targetFile = $targetDir . $imageName;
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($targetFile, PATHINFO_EXTENSION));
+    $newName = ''; // Inisialisasi variabel $newName
 
     // Check if file already exists
     $counter = 1;
@@ -50,7 +52,7 @@ function uploadImage() {
         return "default.png";
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            return $newName;
+            return $newName; // Return the new file name
         } else {
             echo "Sorry, there was an error uploading your file.";
             return '';

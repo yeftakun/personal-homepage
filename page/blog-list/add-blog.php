@@ -56,9 +56,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stored_password = $stmt_password->fetchColumn();
 
     if ($password != $stored_password) {
-        echo "<script>alert('Password salah');</script>";
-        // You can add additional handling here, such as redirecting back to the form
-        exit(); // Stop further execution
+        echo "<script>alert('Password salah'); history.back();</script>";
+    exit(); // Stop further execution
     }
 
     // Continue processing the form if password matches

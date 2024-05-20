@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link rel="stylesheet" href="../../styles/contact.css">
     <style>
         .container {
-            margin-top: 150px;
+            margin-top: 180px;
         }
         .uploadimg{
             padding: 10px;

@@ -61,8 +61,7 @@ $visitorCount = getVisitorCount();
     <div class="container">
         <div class="header-section">
             <img src="../assets/img/foto1.jpg">
-            <h1>Yefta's Blog</h1>
-            <p>This is my Blog</p>
+            <h2>This is my Blog</h2>
             <p>Total Pengunjung: <?php echo $visitorCount; ?></p> <!-- Tampilkan pengunjung -->
         </div>
         

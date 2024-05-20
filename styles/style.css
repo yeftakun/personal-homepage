@@ -18,12 +18,15 @@ body {
     left: 0;
     width: 100%;
     padding: 20px 10%;
-    background: transparent;
+    background-color:rgba(31, 36, 45, 0.5); /* Warna latar belakang dengan transparansi */
+    backdrop-filter: blur(10px); /* Efek blur pada latar belakang */
+    -webkit-backdrop-filter: blur(10px); /* Efek blur untuk browser WebKit seperti Safari */
     display: flex;
     justify-content: space-between;
     align-items: center;
     z-index: 100;
 }
+
 
 .logo {
     font-size: 25px;

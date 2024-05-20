@@ -67,27 +67,34 @@ $visitorCount = getVisitorCount();
         </div>
         
         <!-- Dropdown menu untuk kategori -->
-        <form method="GET" action="blog.php">
-            <label for="category">Select Category </label>
-            <select name="category" id="category">
-                <option value="All">All</option>
-                
-                <?php
-                include('../connection.php');
-                $query = "SELECT * FROM categories"; // Ambil kategori dari database
-                $stmt = $conn->query($query);
+        <form method="GET" action="blog.php" style="display: flex; justify-content: space-around;">
+            <div style="padding-right: 55%;">
+                <label for="category">Select Category </label>
+                <select name="category" id="category">
+                    <option value="All">All</option>
+                    
+                    <?php
+                    include('../connection.php');
+                    $query = "SELECT * FROM categories"; // Ambil kategori dari database
+                    $stmt = $conn->query($query);
 
-                // Kategori yang dipilih
-                $selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'All';
+                    // Kategori yang dipilih
+                    $selectedCategory = isset($_GET['category']) ? $_GET['category'] : 'All';
 
-                // Perulangan untuk menampilkan kategori di dropdown
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    $isActive = ($row['category_id'] == $selectedCategory) ? 'selected="selected"' : '';
-                    echo '<option value="' . $row['category_id'] . '" ' . $isActive . '>' . $row['name'] . '</option>';
-                }
-                ?>
-            </select>
+                    // Perulangan untuk menampilkan kategori di dropdown
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        $isActive = ($row['category_id'] == $selectedCategory) ? 'selected="selected"' : '';
+                        echo '<option value="' . $row['category_id'] . '" ' . $isActive . '>' . $row['name'] . '</option>';
+                    }
+                    ?>
+                </select>
+            </div>
+            <div class="ini-tombol">
+                <!-- Tombol Edit -->
+                <a href="./blog-list/blog-crud.php">Edit</a>
+            </div>
         </form>
+
         <ul class="blog-list">
             <?php
             // Kategori terpilih dari dropdown

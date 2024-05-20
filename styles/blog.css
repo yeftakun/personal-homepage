@@ -122,3 +122,52 @@
     border-color: #007bff; /* Change color on focus */
   }
   
+  .edit-button {
+    padding: 8px 16px;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+
+.edit-button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.edit-button:hover {
+  background-color: #0056b3;
+}
+
+.ini-tombol {
+  margin-top: 0px; /* Memberikan jarak atas */
+  margin-bottom: 20px;
+}
+
+.ini-tombol a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.ini-tombol a:hover {
+  background-color: #0056b3;
+}
+
+form {
+  padding-top: 20px;
+}

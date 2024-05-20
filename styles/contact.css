@@ -72,3 +72,71 @@ form button{
     background: #fff;
     border-bottom: 1px solid #fff;
 }
+
+/* CSS untuk form add-blog agar mirip dengan form contact */
+
+.form-contact {
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    padding: 2vw 4vw;
+    width: 90%;
+    max-width: 600px;
+    border-radius: 10px;
+    margin: 0 auto; /* Pusatkan form */
+}
+
+.form-contact h3 {
+    color: #555;
+    font-weight: 800;
+    margin-bottom: 20px;
+}
+
+.form-contact label {
+    margin-bottom: 10px;
+}
+
+.form-contact input,
+.form-contact textarea,
+.form-contact select {
+    border: 1px solid #ccc;
+    padding: 10px;
+    outline: none;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.form-contact input[type="file"] {
+    display: none;
+}
+
+.form-contact button {
+    padding: 15px;
+    background: #ff5361;
+    color: #fff;
+    font-size: 18px;
+    border: 0;
+    outline: none;
+    cursor: pointer;
+    width: 150px;
+    margin: 20px auto 0;
+    border-radius: 30px;
+}
+
+#image-preview {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 20px;
+    display: none;
+}
+
+/* Styles untuk form add-blog saat ditampilkan di layar kecil */
+@media screen and (max-width: 600px) {
+    .form-contact {
+        padding: 2vw;
+    }
+}
+
+label {
+    color: black;
+}

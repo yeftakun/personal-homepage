@@ -272,10 +272,14 @@
     <!-- Modal for delete confirmation -->
     <div id="deleteModal" class="modal">
         <div class="modal-content">
-            <span class="close">&times;</span>
-            <p id="modalMessage"></p>
-            <button id="confirmDelete">Delete</button>
-        </div>
+        <span class="close">&times;</span>
+        <p id="modalMessage"></p>
+        <form id="deleteForm" method="POST">
+            <label for="deletePassword">Enter Password:</label>
+            <input type="password" id="deletePassword" name="password" required>
+            <button type="submit" id="confirmDelete">Delete</button>
+        </form>
+    </div>
     </div>
 
     </div>
@@ -289,11 +293,8 @@
             var modalMessage = document.getElementById("modalMessage");
             modalMessage.textContent = "Are you sure you want to delete the post '" + postTitle + "'?";
 
-            var confirmDeleteBtn = document.getElementById("confirmDelete");
-            // Redirect to delete-blog.php with post_id parameter when delete button in the modal is clicked
-            confirmDeleteBtn.onclick = function() {
-                window.location.href = "delete-blog.php?id=" + postId;
-            }
+            var deleteForm = document.getElementById("deleteForm");
+            deleteForm.action = "delete-blog.php?id=" + postId; // Set form action with post id
 
             // Close the modal when the close button (x) is clicked
             var span = document.getElementsByClassName("close")[0];

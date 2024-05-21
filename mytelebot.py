@@ -1,7 +1,7 @@
 import telebot
 
 # Ganti TOKEN_BOT_ANDA dengan token bot Telegram Anda
-TOKEN = '7095664056:AAGTjDudYkVraffCQfHrYZGiweTjgh48B3w'
+TOKEN = 'Telegram_Token'
 
 bot = telebot.TeleBot(TOKEN)
 

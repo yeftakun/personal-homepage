@@ -104,7 +104,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Insert data into database
     $query = "INSERT INTO posts (title, author, publish_date, image_path, source_link, category_id, content) 
-    VALUES (:title, :author, :publish_date, :image_path, :source_link, :category, :content)";
+              VALUES (:title, :author, :publish_date, :image_path, :source_link, :category, :content)";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':title', $title);
     $stmt->bindParam(':author', $author);
@@ -115,7 +115,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt->bindParam(':content', $content);
 
     if ($stmt->execute()) {
-    // Fetch the post ID based on the submitted title
+        // Fetch the post ID based on the submitted title
     $queryPostId = "SELECT post_id FROM posts WHERE title = :title";
     $stmtPostId = $conn->prepare($queryPostId);
     $stmtPostId->bindParam(':title', $title);
@@ -155,12 +155,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Send the API request
     $telegramResponse = file_get_contents($telegramRequest);
-
-    // Redirect to blog CRUD page after successful insertion
-    header("Location: blog-crud.php");
-    exit();
+        // Redirect to blog CRUD page after successful insertion
+        header("Location: blog-crud.php");
+        exit();
     } else {
-    echo "Error: " . $stmt->errorInfo()[2];
+        echo "Error: " . $stmt->errorInfo()[2];
     }
 }
 ?>

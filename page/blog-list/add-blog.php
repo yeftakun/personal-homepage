@@ -52,7 +52,8 @@ function uploadImage() {
         return "default.png";
     } else {
         if (move_uploaded_file($_FILES["image"]["tmp_name"], $targetFile)) {
-            return $newName; // Return the new file name
+            // If the file is successfully uploaded, return the new file name
+            return basename($targetFile);
         } else {
             echo "Sorry, there was an error uploading your file.";
             return '';
@@ -206,16 +207,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             <label for="title">Title:</label>
             <input type="text" id="title" name="title" required>
 
-            <label for="author">Author:</label>
-            <input type="text" id="author" name="author" required>
-
-            <label for="image" class="uploadimg">Upload Cover Image</label>
-            <input type="file" id="image" name="image" accept="image/*">
-            <img id="image-preview" src="#" alt="image-preview">
-
-            <label for="source_link">Source Link:</label>
-            <input type="text" id="source_link" name="source_link" required>
-
             <label for="category">Category:</label>
             <select id="category" name="category">
                 <option value="">Select Category</option>
@@ -228,6 +219,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 }
                 ?>
             </select>
+
+            <label for="author">Author:</label>
+            <input type="text" id="author" name="author" required>
+
+            <label for="image" class="uploadimg">Upload Cover Image</label>
+            <input type="file" id="image" name="image" accept="image/*">
+            <img id="image-preview" src="#" alt="image-preview">
+
+            <label for="source_link">Source Link:</label>
+            <input type="text" id="source_link" name="source_link" required>
 
             <label for="content">Content:</label>
             <textarea id="content" name="content" placeholder="<p>Input content with HTML format</p>" rows="5" required></textarea>

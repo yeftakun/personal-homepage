@@ -145,20 +145,31 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $message .= "Link: $link";
 
     // Send notification to Telegram
-    $telegramUrl = "https://api.telegram.org/bot7095664056:AAEiPyzvnPYcWBk2SVNgfYHk0TgRWaa-g4c/sendMessage";
+    $telegramUrl = "https://api.telegram.org/bot7095664056:AAEiPyzvnPYcWBk2SVNgfYHk0TgRWaa-g4c/sendMessage"; // Ganti YOUR_BOT_TOKEN dengan token bot Anda
     $telegramParams = [
-    'parse_mode' => 'markdown',
-    'chat_id' => '1627790263',
-    'text' => $message
+        'parse_mode' => 'markdown',
+        'text' => $message
     ];
-    $telegramQuery = http_build_query($telegramParams);
-    $telegramRequest = $telegramUrl . '?' . $telegramQuery;
 
-    // Send the API request
-    $telegramResponse = file_get_contents($telegramRequest);
-        // Redirect to blog CRUD page after successful insertion
-        header("Location: blog-crud.php");
-        exit();
+    // Fetch all chat IDs from the database
+    $queryChatIds = "SELECT id_chat FROM telegram_subscribers";
+    $stmtChatIds = $conn->query($queryChatIds);
+    $chatIds = $stmtChatIds->fetchAll(PDO::FETCH_COLUMN);
+
+    // Loop through each chat ID and send the notification
+    foreach ($chatIds as $chatId) {
+        $telegramParams['chat_id'] = $chatId;
+        $telegramQuery = http_build_query($telegramParams);
+        $telegramRequest = $telegramUrl . '?' . $telegramQuery;
+
+        // Send the API request
+        $telegramResponse = file_get_contents($telegramRequest);
+    }
+
+    // Redirect to blog CRUD page after successful insertion
+    header("Location: blog-crud.php");
+    exit();
+
     } else {
         echo "Error: " . $stmt->errorInfo()[2];
     }

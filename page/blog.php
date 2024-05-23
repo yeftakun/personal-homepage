@@ -88,9 +88,15 @@ $visitorCount = getVisitorCount();
                     ?>
                 </select>
             </div>
-            <div class="ini-tombol">
-                <!-- Tombol Edit -->
-                <a href="./blog-list/blog-crud.php">Edit</a>
+            <div class="hehehe" style="display: flex;">
+                <div class="ini-tombol" style="padding-right: 5px">
+                        <!-- Tombol Edit -->
+                        <a href="./subs/sub.php">Subscribe</a>
+                </div>
+                <div class="ini-tombol">
+                    <!-- Tombol Edit -->
+                    <a href="./blog-list/blog-crud.php">Edit</a>
+                </div>
             </div>
         </form>
 

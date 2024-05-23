@@ -27,7 +27,7 @@
             <h3>Subscribe to Blog Notifications</h3>
             <label for="chat_id">Masukkan Chat ID:</label>
             <input type="text" id="chat_id" name="chat_id" placeholder="Chat ID" required>
-            <p><a href="https://t.me/blognotification_bot">Get your ChatID</a></p>
+            <p><a href="https://t.me/chatIDrobot">Get your ChatID</a></p>
             <button type="submit" class="button" name="subscribe">Subscribe</button>
             <button class="button" onclick="redirectToBot()">Init</button>
         </form>

@@ -2,7 +2,7 @@
 
 On-going repo dari tugas [TIK2032-project-php-mysql](https://github.com/yeftakun/TIK2032-project-php-mysql.git)
 
-Page: [yeftakun.my.id](http://yeftakun.my.id)
+Page: [52.77.254.144](http://52.77.254.144)
 
 <a href="https://youtu.be/QtdbGIvLJKo?si=uFrV_p2AISCH4A52">Tutorial Deploy AWS</a>
 
